@@ -1,43 +1,49 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="Valentine 💖", layout="centered")
 
-st.markdown("""
-<style>
-body {
-    background-color: #0e0e0e;
-}
+st.markdown(
+    """
+    <h1 style="text-align:center;">Will you be my Valentine, puppy? 🐶❤️</h1>
+    <br>
+    """,
+    unsafe_allow_html=True
+)
 
-.rose {
-    font-size: 120px;
-    text-align: center;
-    margin-top: 100px;
-}
+html_code = """
+<div style="text-align:center; position:relative; height:200px;">
 
-.petal {
-    position: absolute;
-    font-size: 24px;
-    animation: fall 6s linear infinite;
-}
+  <button onclick="yesClicked()" 
+          style="padding:12px 25px; font-size:18px; background:#ff4d6d; color:white; border:none; border-radius:8px; cursor:pointer;">
+    YES 💕
+  </button>
 
-@keyframes fall {
-    0% {
-        top: -10%;
-        opacity: 1;
-    }
-    100% {
-        top: 110%;
-        opacity: 0;
-    }
-}
-</style>
-""", unsafe_allow_html=True)
+  <button id="noBtn"
+          style="padding:12px 25px; font-size:18px; margin-left:20px; position:absolute; background:#ccc; border:none; border-radius:8px; cursor:pointer;">
+    NO 🙈
+  </button>
 
-st.markdown("""
-<div class="rose">🌹</div>
+</div>
 
-<div class="petal" style="left:20%;">🌸</div>
-<div class="petal" style="left:40%; animation-delay:1s;">🌸</div>
-<div class="petal" style="left:60%; animation-delay:2s;">🌸</div>
-<div class="petal" style="left:80%; animation-delay:3s;">🌸</div>
-""", unsafe_allow_html=True)
+<script>
+  const noBtn = document.getElementById("noBtn");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 100 - 50;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  function yesClicked() {
+    document.body.innerHTML = `
+      <h1 style="text-align:center; margin-top:80px;">
+        Yayyy! 🥰❤️<br><br>
+        I knew it 🐶🌹
+      </h1>
+    `;
+  }
+</script>
+"""
+
+components.html(html_code, height=300)
