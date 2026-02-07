@@ -29,11 +29,20 @@ html_code = """
 <script>
   const noBtn = document.getElementById("noBtn");
 
-  noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 100 - 50;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  });
+ function moveNoButton() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
 
   function yesClicked() {
     document.body.innerHTML = `
@@ -47,3 +56,4 @@ html_code = """
 """
 
 components.html(html_code, height=300)
+
