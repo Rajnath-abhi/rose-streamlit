@@ -56,3 +56,50 @@ button {
   margin-top: 40px;
 }
 </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="name">Vani ❤️</div>
+
+    <div class="question">
+      Will you be my Valentine? 🌹
+    </div>
+
+    <button id="yesBtn" onclick="yesClicked()">YES 💕</button>
+    <button id="noBtn">NO 😅</button>
+
+    <div id="message"></div>
+  </div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+
+function moveNoButton() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+function yesClicked() {
+  document.body.innerHTML = `
+    <div style="margin-top:120px; font-size:34px; color:white;">
+      Vani ❤️ 😍<br><br>
+      Naku telusu nuv YES antav ani 😌<br><br>
+      From today… you are my Valentine 🌹💍
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
+"""
+
+components.html(html_code, height=520)
