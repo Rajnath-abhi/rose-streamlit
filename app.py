@@ -1,6 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+st.set_page_config(page_title="Proposal 💖", layout="centered")
+
 html_code = """
 <!DOCTYPE html>
 <html>
@@ -11,72 +13,85 @@ body {
   color: white;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
+  overflow: hidden;
 }
 
 .container {
-  margin-top: 70px;
-  padding: 20px;
+  margin-top: 80px;
 }
 
-.line {
-  font-size: 26px;
-  opacity: 0;
-  transition: opacity 0.6s ease;
+.question {
+  font-size: 32px;
+  margin-bottom: 40px;
 }
 
 button {
-  margin-top: 40px;
-  padding: 12px 32px;
+  padding: 12px 30px;
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background: #ff4d6d;
-  color: white;
   cursor: pointer;
 }
 
-button:hover {
-  background: #ff2e55;
+#yesBtn {
+  background: #2ecc71;
+  color: white;
+  margin-right: 20px;
+}
+
+#noBtn {
+  background: #e74c3c;
+  color: white;
+  position: absolute;
+}
+
+#message {
+  font-size: 28px;
+  margin-top: 40px;
 }
 </style>
 </head>
 
 <body>
   <div class="container">
-    <div id="line" class="line"></div>
-    <button onclick="nextLine()">Next 👉</button>
+    <div class="question">
+      Will you be my Valentine? 🌹❤️
+    </div>
+
+    <button id="yesBtn" onclick="yesClicked()">YES 💕</button>
+    <button id="noBtn">NO 😅</button>
+
+    <div id="message"></div>
   </div>
 
 <script>
-const lines = [
-  "Nenu scientist kaadu… kani nee smile chuste heart automatic ga react avtundi 😂❤️",
-  "Cinema lo hero laaga dialogues raavu… kani feeling maatram full clarity 😌",
-  "Nee msg vasthe chaalu… mood automatic ga happy mode lo ki velthadi 😄",
-  "Arey idi love aa crush aa telidu… kani skip cheyyalekapothunna 😜",
-  "Nuvvu navvutunte background lo music play avvali anipistundi 🎶😂",
-  "Life lo logic miss ayina parledhu… nuvvu maatram miss avvakudadhu 😌❤️",
-  "Ee Proposal Day roju cheppali anipinchindi…",
-  "Cinema ending la kaadu idi… real life start avvali 💫",
-  "So… will you be my Valentine? 🌹💍"
-];
+const noBtn = document.getElementById("noBtn");
 
-let index = 0;
-const lineDiv = document.getElementById("line");
+function moveNoButton() {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
 
-function nextLine() {
-  lineDiv.style.opacity = 0;
-  setTimeout(() => {
-    lineDiv.innerHTML = lines[index];
-    lineDiv.style.opacity = 1;
-    index++;
-    if (index >= lines.length) index = lines.length - 1;
-  }, 300);
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
 
-nextLine();
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+function yesClicked() {
+  document.body.innerHTML = `
+    <div style="margin-top:120px; font-size:36px; color:white;">
+      Yayyy! 😍💖<br><br>
+      Naku telusu nuv YES antav ani 😌<br><br>
+      Happy Proposal Day 🌹💍
+    </div>
+  `;
+}
 </script>
 </body>
 </html>
 """
 
-components.html(html_code, height=420)
+components.html(html_code, height=500)
