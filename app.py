@@ -1,59 +1,82 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-st.set_page_config(page_title="Valentine 💖", layout="centered")
-
-st.markdown(
-    """
-    <h1 style="text-align:center;">Will you be my Valentine, puppy? 🐶❤️</h1>
-    <br>
-    """,
-    unsafe_allow_html=True
-)
-
 html_code = """
-<div style="text-align:center; position:relative; height:200px;">
-
-  <button onclick="yesClicked()" 
-          style="padding:12px 25px; font-size:18px; background:#ff4d6d; color:white; border:none; border-radius:8px; cursor:pointer;">
-    YES 💕
-  </button>
-
-  <button id="noBtn"
-          style="padding:12px 25px; font-size:18px; margin-left:20px; position:absolute; background:#ccc; border:none; border-radius:8px; cursor:pointer;">
-    NO 🙈
-  </button>
-
-</div>
-
-<script>
-  const noBtn = document.getElementById("noBtn");
-
- function moveNoButton() {
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  noBtn.style.position = "absolute";
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  background: linear-gradient(135deg, #000000, #1a1a2e);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
 }
 
-noBtn.addEventListener("mouseenter", moveNoButton);
+.container {
+  margin-top: 70px;
+  padding: 20px;
+}
 
+.line {
+  font-size: 26px;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
 
-  function yesClicked() {
-    document.body.innerHTML = `
-      <h1 style="text-align:center; margin-top:80px;">
-        Yayyy! 🥰❤️<br><br>
-        I knew it 🐶🌹
-      </h1>
-    `;
-  }
+button {
+  margin-top: 40px;
+  padding: 12px 32px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff2e55;
+}
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="line" class="line"></div>
+    <button onclick="nextLine()">Next 👉</button>
+  </div>
+
+<script>
+const lines = [
+  "Nenu scientist kaadu… kani nee smile chuste heart automatic ga react avtundi 😂❤️",
+  "Cinema lo hero laaga dialogues raavu… kani feeling maatram full clarity 😌",
+  "Nee msg vasthe chaalu… mood automatic ga happy mode lo ki velthadi 😄",
+  "Arey idi love aa crush aa telidu… kani skip cheyyalekapothunna 😜",
+  "Nuvvu navvutunte background lo music play avvali anipistundi 🎶😂",
+  "Life lo logic miss ayina parledhu… nuvvu maatram miss avvakudadhu 😌❤️",
+  "Ee Proposal Day roju cheppali anipinchindi…",
+  "Cinema ending la kaadu idi… real life start avvali 💫",
+  "So… will you be my Valentine? 🌹💍"
+];
+
+let index = 0;
+const lineDiv = document.getElementById("line");
+
+function nextLine() {
+  lineDiv.style.opacity = 0;
+  setTimeout(() => {
+    lineDiv.innerHTML = lines[index];
+    lineDiv.style.opacity = 1;
+    index++;
+    if (index >= lines.length) index = lines.length - 1;
+  }, 300);
+}
+
+nextLine();
 </script>
+</body>
+</html>
 """
 
-components.html(html_code, height=300)
-
+components.html(html_code, height=420)
